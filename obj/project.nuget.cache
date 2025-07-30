@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "+NLEAxNX9Dk=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pokem\\OneDrive\\Área de Trabalho\\Desafio-F\\LaboratorioRestApi\\LaboratorioRestApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pokem\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.7\\microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
+    "C:\\Users\\pokem\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
