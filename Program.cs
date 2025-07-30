@@ -1,4 +1,7 @@
 
+using LaboratorioRestApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace LaboratorioRestApi;
 
 public class Program
@@ -8,6 +11,8 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+
+        builder.Services.AddDbContext<BibliotecaContext>(options => options.UseNpgsql("HOST=localhost;Port=5432;Database=labrestapi;Username=postgres;Password=lab"));
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
