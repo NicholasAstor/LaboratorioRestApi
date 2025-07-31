@@ -6,6 +6,6 @@ namespace LaboratorioRestApi.Repository.Interface
     {
         Task<Emprestimo> Create(Emprestimo emprestimo);
         Task<Emprestimo> Update(Emprestimo emprestimo);
-        Task<Emprestimo> Get(int livroId);//Registros em aberto do livro 
+        Task<Emprestimo> Get(long livroId);//Registros em aberto do livro 
     }
 }

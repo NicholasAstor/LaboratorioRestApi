@@ -1,0 +1,13 @@
+using LaboratorioRestApi.Models;
+using LaboratorioRestApi.Models.DTO;
+
+namespace LaboratorioRestApi.Service.Interface
+{
+    public interface ILivroService
+    {
+        Task<Livro> CreateLivro(Livro livro);
+        Task<IEnumerable<Livro>> GetAllLivros();
+        Task<IEnumerable<Livro>> GetLivroByAutor(long idAutor);
+        Task<IEnumerable<ListLivroStatusDTO>> GetLivrosPorAutor(long autorId);
+    }
+}

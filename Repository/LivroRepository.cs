@@ -26,10 +26,16 @@ namespace LaboratorioRestApi.Repository
         .Include(l => l.Autores)
         .ToListAsync();
 
-        public async Task<IEnumerable<Livro>> GetByAutor(int idAutor) => await _db.Autores
+        public async Task<IEnumerable<Livro>> GetByAutor(long idAutor) => await _db.Autores
         .Where(a => a.Id == idAutor)
         .SelectMany(a => a.Livros)
         .Include(l => l.Autores)
         .ToListAsync();
+
+        public async Task<Emprestimo?> GetEmprestimoByLivro(long livroId) => await _db.Emprestimos
+        .Where(e => e.Livro.Id == livroId && !e.Entregue)
+        .OrderByDescending(e => e.DataRetirada)
+        .Include(l => l.Livro)
+        .FirstOrDefaultAsync();
     }
 }
