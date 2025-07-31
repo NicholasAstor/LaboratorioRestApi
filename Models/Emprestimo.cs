@@ -9,5 +9,6 @@ namespace LaboratorioRestApi.Models
         public required DateTime DataRetirada { get; set; }
         public DateTime DataDevolucao { get; set; }
         public required bool Entregue { get; set; }   
+        public required Livro Livro { get; set; } // funciona como LivroId e já faz a FK
     }
 }

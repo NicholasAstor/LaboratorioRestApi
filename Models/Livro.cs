@@ -8,5 +8,6 @@ namespace LaboratorioRestApi.Models
         [Key]
         public long Id { get; set; }
         public required string Titulo { get; set; }
+        public ICollection<Autor> Autores { get; set; } // many to many relationship
     }
 }

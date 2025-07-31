@@ -13,6 +13,9 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddDbContext<BibliotecaContext>(options => options.UseNpgsql("HOST=localhost;Port=5432;Database=labrestapi;Username=postgres;Password=lab"));
+        builder.Services.AddScoped<LaboratorioRestApi.Repository.AutorRepository, LaboratorioRestApi.Repository.AutorRepository>();
+        builder.Services.AddScoped<LaboratorioRestApi.Repository.Interface.IEmprestimoRepository, LaboratorioRestApi.Repository.EmprestimoRepository>();
+        builder.Services.AddScoped<LaboratorioRestApi.Repository.Interface.ILivroRepository, LaboratorioRestApi.Repository.LivroRepository>();
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
