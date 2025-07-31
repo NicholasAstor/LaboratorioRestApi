@@ -9,13 +9,27 @@ namespace LaboratorioRestApi.Service
     {
         private readonly ILivroRepository _repo;
 
-        public LivroService(ILivroRepository repo)
-        {
-            _repo = repo;
-        }
+        public LivroService(ILivroRepository repo) => _repo = repo;
 
         public async Task<Livro> CreateLivro(Livro livro) => await _repo.Create(livro);
-        public async Task<IEnumerable<Livro>> GetAllLivros() => await _repo.GetAll();
+        public async Task<IEnumerable<LivroDTO>> GetAllLivros()
+        {
+            var livros = await _repo.GetAll();
+
+            var result = livros.Select(l => new LivroDTO
+            {
+                Id = l.Id,
+                Titulo = l.Titulo,
+                Autores = l.Autores.Select(a => new ListAutorLivroDTO
+                {
+                    Id = a.Id,
+                    PrimeiroNome = a.PrimeiroNome,
+                    SegundoNome = a.SegundoNome
+                }).ToList()
+            });
+
+            return result;
+        }
         public async Task<IEnumerable<Livro>> GetLivroByAutor(long idAutor) => await _repo.GetByAutor(idAutor);
         public async Task<IEnumerable<ListLivroStatusDTO>> GetLivrosPorAutor(long autorId)
         {
@@ -38,5 +52,7 @@ namespace LaboratorioRestApi.Service
 
             return result;
         }
+
+        public async Task AddAutorToTheBook(long idLivro, long idAutor) => await _repo.AddAutorLivro(idLivro, idAutor);
     }
 }

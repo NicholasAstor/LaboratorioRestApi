@@ -37,5 +37,18 @@ namespace LaboratorioRestApi.Repository
         .OrderByDescending(e => e.DataRetirada)
         .Include(l => l.Livro)
         .FirstOrDefaultAsync();
+
+        public async Task AddAutorLivro(long idLivro, long idAutor)
+        {
+            var autor = await _db.Autores.FirstOrDefaultAsync(a => a.Id == idAutor);
+            var livro = await _db.Livros.FirstOrDefaultAsync(l => l.Id == idLivro);
+            if (autor != null && livro != null)
+            {
+                livro.Autores.Add(autor);
+                await _db.SaveChangesAsync();
+                return;
+            }
+            throw new Exception("Erro ao adicionar autor ao livro");
+        } 
     }
 }

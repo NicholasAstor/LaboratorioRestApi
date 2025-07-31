@@ -10,7 +10,7 @@ namespace LaboratorioRestApi.Repository
         private readonly BibliotecaContext _db;
         public AutorRepository(BibliotecaContext db) => _db = db;
         public async Task<Autor?> GetLastName(string name) => await _db.Autores
-        .FirstOrDefaultAsync(a => a.segundoNome == name);
+        .FirstOrDefaultAsync(a => a.SegundoNome == name);
 
         public async Task<Autor> Create(Autor autor)
         {
@@ -30,8 +30,8 @@ namespace LaboratorioRestApi.Repository
 
             if (autorAtualiza != null)
             {
-                autorAtualiza.primeiroNome = autor.primeiroNome;
-                autorAtualiza.segundoNome = autor.segundoNome;
+                autorAtualiza.PrimeiroNome = autor.PrimeiroNome;
+                autorAtualiza.SegundoNome = autor.SegundoNome;
                 await _db.SaveChangesAsync();
                 return autorAtualiza;
             }
