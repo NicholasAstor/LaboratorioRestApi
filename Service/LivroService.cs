@@ -30,10 +30,28 @@ namespace LaboratorioRestApi.Service
 
             return result;
         }
-        public async Task<IEnumerable<Livro>> GetLivroByAutor(long idAutor) => await _repo.GetByAutor(idAutor);
+        public async Task<IEnumerable<LivroDTO>> GetLivroByAutor(long idAutor)
+        {
+            var livros = await _repo.GetByAutor(idAutor);
+
+            var result = livros.Select(l => new LivroDTO
+            {
+                Id = l.Id,
+                Titulo = l.Titulo,
+                Autores = l.Autores.Select(a => new ListAutorLivroDTO
+                {
+                    Id = a.Id,
+                    PrimeiroNome = a.PrimeiroNome,
+                    SegundoNome = a.SegundoNome
+                }).ToList()
+            });
+
+            return result;
+        }
         public async Task<IEnumerable<ListLivroStatusDTO>> GetLivrosPorAutor(long autorId)
         {
             var livros = await _repo.GetByAutor(autorId);
+
             var result = new List<ListLivroStatusDTO>();
 
             foreach (var livro in livros)
@@ -44,8 +62,8 @@ namespace LaboratorioRestApi.Service
                 {
                     LivroId = livro.Id,
                     Titulo = livro.Titulo,
-                    Disponivel = !emprestimo.Entregue ? true : false,
-                    DataDevolucao = emprestimo.DataDevolucao
+                    Disponivel = emprestimo == null || emprestimo.Entregue,
+                    DataDevolucao = emprestimo?.DataDevolucao
 
                 });
             }

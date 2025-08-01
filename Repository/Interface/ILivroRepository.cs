@@ -4,10 +4,10 @@ namespace LaboratorioRestApi.Repository.Interface
 {
     public interface ILivroRepository
     {
-        Task<Livro> Create(Livro livro);
-        Task<IEnumerable<Livro>> GetAll();
-        Task<IEnumerable<Livro>> GetByAutor(long idAutor);
-        Task<Emprestimo?> GetEmprestimoByLivro(long livroId);
-        Task AddAutorLivro(long idLivro, long idAutor);
+        Task<Livro> Create(Livro livro); // funcionando
+        Task<IEnumerable<Livro>> GetAll(); // funcionando
+        Task<IEnumerable<Livro>> GetByAutor(long idAutor); // funcionando
+        Task<Emprestimo?> GetEmprestimoByLivro(long livroId); // funcionando
+        Task AddAutorLivro(long idLivro, long idAutor); // funcionando
     }
 }

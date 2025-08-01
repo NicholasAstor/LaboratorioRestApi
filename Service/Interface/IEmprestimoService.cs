@@ -1,11 +1,12 @@
 using LaboratorioRestApi.Models;
+using LaboratorioRestApi.Models.DTO;
 
 namespace LaboratorioRestApi.Service.Interface
 {
     public interface IEmprestimoService
     {
-        Task<Emprestimo> CreateEmprestimo(Emprestimo emprestimo);
-        Task<Emprestimo> UpdateEmprestimo(Emprestimo emprestimo);
-        Task<Emprestimo> GetEmprestimoAtivoByLivro(int livroId);
+        Task<Emprestimo> CreateEmprestimo(long idLivro);
+        Task<double> UpdateEmprestimo(long id, DateTime dataEntrega);
+        Task<EmprestimoDTO> GetEmprestimoAtivoByLivro(int livroId);
     }
 }

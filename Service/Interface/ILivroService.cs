@@ -7,7 +7,7 @@ namespace LaboratorioRestApi.Service.Interface
     {
         Task<Livro> CreateLivro(Livro livro);
         Task<IEnumerable<LivroDTO>> GetAllLivros();
-        Task<IEnumerable<Livro>> GetLivroByAutor(long idAutor);
+        Task<IEnumerable<LivroDTO>> GetLivroByAutor(long idAutor);
         Task<IEnumerable<ListLivroStatusDTO>> GetLivrosPorAutor(long autorId);
         Task AddAutorToTheBook(long idLivro, long idAutor);
     }

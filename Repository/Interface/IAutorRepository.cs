@@ -4,8 +4,8 @@ namespace LaboratorioRestApi.Repository.Interface
 {
     public interface IAutorRepository
     {
-        Task<Autor> GetLastName(string name);
-        Task<Autor> Create(Autor autor);
-        Task<Autor> Update(Autor autor);
+        Task<IEnumerable<Autor>> GetLastName(string name); // funcionando
+        Task<Autor> Create(Autor autor); // funcionando
+        Task<Autor> Update(long id, Autor autor); // funcionando
     }
 }

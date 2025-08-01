@@ -16,14 +16,14 @@ namespace LaboratorioRestApi.Controllers
         public LivroController(ILivroService service) => _service = service;
 
         [HttpPost]
-        public async Task<ActionResult<Livro>> Create([FromBody] Livro livro)
+        public async Task<ActionResult<Livro>> Create([FromBody] Livro livro) // Criar um autor no banco
         {
             var createdLivro = await _service.CreateLivro(livro);
             return Ok(createdLivro);
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LivroDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<LivroDTO>>> Get() // Get de todos os autores
         {
             var allLivros = await _service.GetAllLivros();
             if (allLivros != null)
@@ -34,7 +34,7 @@ namespace LaboratorioRestApi.Controllers
         }
 
         [HttpGet("autor/{id}")]
-        public async Task<ActionResult<IEnumerable<Livro>>> GetByAutor(long id)
+        public async Task<ActionResult<IEnumerable<LivroDTO>>> GetByAutor(long id) // Get por id do autor relacionado ao livro
         {
             var livrosByAutor = await _service.GetLivroByAutor(id);
             if (livrosByAutor != null)
@@ -44,8 +44,19 @@ namespace LaboratorioRestApi.Controllers
             return NotFound("Nenhum livro encontrado para esse autor");
         }
 
+        [HttpGet("autor/status/{id}")]
+        public async Task<ActionResult<IEnumerable<ListLivroStatusDTO>>> GetByAutorWithStatus(long id) // Funcionalidade de negócio proposta pelo professor (Get de livros pelo autor mostrando sua disponibilidade)
+        {
+            var livrosByAutorWithStatus = await _service.GetLivrosPorAutor(id);
+            if (livrosByAutorWithStatus != null)
+            {
+                return Ok(livrosByAutorWithStatus);
+            }
+            return NotFound("Nenhum livro encontrado para esse autor");
+        }
+
         [HttpPut("{livro}/autor/{autor}")]
-        public async Task<ActionResult> AddAutor(long livro, long autor)
+        public async Task<ActionResult> AddAutor(long livro, long autor) // Relacionar um autor a um livro
         {
             await _service.AddAutorToTheBook(livro, autor);
             return Ok();

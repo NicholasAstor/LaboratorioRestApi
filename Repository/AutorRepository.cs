@@ -9,8 +9,10 @@ namespace LaboratorioRestApi.Repository
     {
         private readonly BibliotecaContext _db;
         public AutorRepository(BibliotecaContext db) => _db = db;
-        public async Task<Autor?> GetLastName(string name) => await _db.Autores
-        .FirstOrDefaultAsync(a => a.SegundoNome == name);
+        public async Task<IEnumerable<Autor?>> GetLastName(string name) => await _db.Autores
+        .Where(a => a.SegundoNome.ToUpper() == name.ToUpper())
+        .Include(a => a.Livros)
+        .ToListAsync();
 
         public async Task<Autor> Create(Autor autor)
         {
@@ -24,9 +26,9 @@ namespace LaboratorioRestApi.Repository
             throw new Exception("Erro ao criar Autor");
         }
 
-        public async Task<Autor> Update(Autor autor)
+        public async Task<Autor> Update(long id, Autor autor)
         {
-            var autorAtualiza = await _db.Autores.FirstOrDefaultAsync(a => a.Id == autor.Id);
+            var autorAtualiza = await _db.Autores.FirstOrDefaultAsync(a => a.Id == id);
 
             if (autorAtualiza != null)
             {
